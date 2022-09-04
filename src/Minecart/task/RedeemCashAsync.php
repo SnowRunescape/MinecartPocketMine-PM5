@@ -3,6 +3,7 @@
 namespace Minecart\task;
 
 use pocketmine\console\ConsoleCommandSender;
+use pocketmine\player\Player;
 use pocketmine\scheduler\AsyncTask;
 
 use pocketmine\lang\Language;
@@ -44,6 +45,7 @@ class RedeemCashAsync extends AsyncTask
 
         if (!empty($response)) {
             $statusCode = $response["statusCode"];
+
             if ($statusCode == 200) {
                 $response = $response["response"];
 
