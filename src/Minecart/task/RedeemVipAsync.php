@@ -51,7 +51,7 @@ class RedeemVipAsync  extends AsyncTask
             if ($statusCode == 200) {
                 $response = $response["response"];
 
-                if ($this->executeCommands($player, $response["response"])) {
+                if ($this->executeCommands($player, $response)) {
                     $messages = new Messages();
                     $messages->sendGlobalInfo($player, "vip", $response["group"]);
 
