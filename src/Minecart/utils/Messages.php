@@ -34,7 +34,7 @@ class Messages
 
     public function sendGlobalInfo(Player $player, string $type, string $info)
     {
-        if (Minecart::getInstance()->getCfg("config.global_info")) {
+        if (!Minecart::getInstance()->getCfg("config.global_info")) {
             return;
         }
 
