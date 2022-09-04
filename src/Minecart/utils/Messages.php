@@ -41,8 +41,8 @@ class Messages
         $title = Minecart::getInstance()->getMessage("success.global-info-title");
         $subtitle = Minecart::getInstance()->getMessage($type == "vip" ? "success.global-info-subtitle-vip" : "success.global-info-subtitle-cash");
 
-        $title = str_replace("{player}", $player->getName(), $title);
-        $subtitle = str_replace(["{group}", "{cash}"], [$info, $info], $subtitle);
+        $title = str_replace("{player.name}", $player->getName(), $title);
+        $subtitle = str_replace(["{key.group}", "{cash.quantity}"], [$info, $info], $subtitle);
 
         Minecart::getInstance()->getServer()->broadcastTitle($title, $subtitle);
 

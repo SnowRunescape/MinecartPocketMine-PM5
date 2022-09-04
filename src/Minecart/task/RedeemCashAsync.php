@@ -53,8 +53,7 @@ class RedeemCashAsync extends AsyncTask
                     $messages = new Messages();
                     $messages->sendGlobalInfo($player, "cash", $response["cash"]);
                 } else {
-                    $error = Minecart::getInstance()->getMessage("error.redeem-cash");
-                    $error = str_replace("{cash}", $response["cash"], $error);
+                    $error = $this->parseText(Minecart::getInstance()->getMessage("error.redeem-cash"), $player, $response);
 
                     $player->sendMessage($error);
                 }

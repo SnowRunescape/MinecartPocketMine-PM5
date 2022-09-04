@@ -241,7 +241,7 @@ class Form
                 $key = $product["key"];
                 $group = $product["group"];
                 $duration = $product["duration"];
-                $info = str_replace(["{key}", "{group}", "{duration}"], [$key, $group, $duration], $info);
+                $info = str_replace(["{key}", "{key.group}", "{key.duration}"], [$key, $group, $duration], $info);
 
                 $form->addButton($info);
                 $i++;
