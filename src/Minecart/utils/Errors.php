@@ -21,7 +21,7 @@ class Errors
                 $message = Minecart::getInstance()->getMessage("error.nothing-products-cash");
                 break;
             case 40013:
-                $message = Minecart::getInstance()->getMessage("commands-product-not-registred");
+                $message = Minecart::getInstance()->getMessage("error.commands-product-not-registred");
                 break;
             case 401:
                 $message = Minecart::getInstance()->getMessage("error.invalid-shopkey");
