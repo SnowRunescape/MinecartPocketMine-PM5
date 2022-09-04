@@ -30,6 +30,7 @@ error:
   player-dont-have-key: '§cVocê não possui nenhuma KEY.'
   nothing-products-vip: '§7Você não possui nenhum §aVIP §7para ser resgatado!'
   nothing-products-cash: '§7Você não possui §aCASH §7para ser resgatado!'
+  commands-product-not-registred: '§cOs §6§lComandos §cdo produto não foi configurado, entre em contato com um administrador!'
   inform-key: '§cInforme a key'
   active-key: '§7Ocorreu um erro ao ativar o §aVIP§7, tente novamente!'
   invalid-key: '§cKey inválida ou inexistente'

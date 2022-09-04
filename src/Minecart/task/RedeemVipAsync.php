@@ -3,6 +3,7 @@
 namespace Minecart\task;
 
 use pocketmine\console\ConsoleCommandSender;
+use pocketmine\player\Player;
 use pocketmine\scheduler\AsyncTask;
 
 use pocketmine\lang\Language;
@@ -13,7 +14,8 @@ use Minecart\Minecart;
 use Minecart\utils\Errors;
 use Minecart\utils\Messages;
 
-class RedeemVipAsync  extends AsyncTask {
+class RedeemVipAsync  extends AsyncTask
+{
     private $username;
     private $key;
     private $authorization;
@@ -32,7 +34,7 @@ class RedeemVipAsync  extends AsyncTask {
         $api = new API();
         $api->setAuthorization($this->authorization);
         $api->setShopServer($this->shopServer);
-        $api->setParams(['username' => $this->username, 'key' => $this->key]);
+        $api->setParams(["username" => $this->username, "key" => $this->key]);
         $api->setURL(API::REDEEMVIP_URI);
 
         $this->setResult($api->send());
@@ -43,43 +45,55 @@ class RedeemVipAsync  extends AsyncTask {
         $player = Minecart::getInstance()->getServer()->getPlayerExact($this->username);
         $response = $this->getResult();
 
-        if(!empty($response)){
-            $statusCode = $response['statusCode'];
-            if($statusCode == 200) {
-                $response = $response['response'];
-                $group = $response['group'];
-                $duration = $response['duration'];
-                $key = $response['key'];
+        if (!empty($response)) {
+            $statusCode = $response["statusCode"];
 
-                $command = Minecart::getInstance()->getCfg('cmd.cmd_active_vip');
-                $command = str_replace(['{player}', '{group}', '{duration}'], [$player->getName(), $group, $duration], $command);
+            if ($statusCode == 200) {
+                $response = $response["response"];
 
-                if(Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language('eng')), $command)) {
+                if ($this->executeCommands($player, $response["response"])) {
                     $messages = new Messages();
-                    $messages->sendGlobalInfo($player, 'vip', $group);
+                    $messages->sendGlobalInfo($player, "vip", $response["group"]);
 
-                    $message = Minecart::getInstance()->getMessage('success.active-key');
-                    $message = str_replace(['{player}', '{group}', '{duration}'], [$player->getName(), $group, $duration], $message);
+                    $message = $this->parseText(Minecart::getInstance()->getMessage("success.active-key"), $player, $response);
                     $player->sendMessage($message);
-                }else{
-                    $error = Minecart::getInstance()->getMessage('error.redeem-vip');
-                    $error = str_replace(['{group}', '{duration}'], [$group, $duration], $error);
-
+                } else {
+                    $error = $this->parseText(Minecart::getInstance()->getMessage("error.redeem-vip"), $player, $response);
                     $player->sendMessage($error);
                 }
-            }else{
+            } else {
                 $form = new Form();
-                $form->setTitle('Resgatar VIP');
-                $form->setPlaceholder('Insira sua key');
+                $form->setTitle("Resgatar VIP");
+                $form->setPlaceholder("Insira sua key");
                 $form->setRedeemType(Form::REDEEM_VIP);
                 $form->setKey($this->key);
 
                 $errors = new Errors();
-                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, 'vip', true);
+                $error = $errors->getError($player, $response["response"]["code"] ?? $statusCode, true);
                 $form->showRedeem($player, $error);
             }
-        }else{
-            $player->sendMessage(Minecart::getInstance()->getMessage('error.internal-error'));
+        } else {
+            $player->sendMessage(Minecart::getInstance()->getMessage("error.internal-error"));
         }
+    }
+
+    private function executeCommands(Player $player, array $response) : bool
+    {
+        $result = true;
+
+        foreach ($response["commands"] as $command) {
+            $command = $this->parseText($command, $player, $response);
+
+            if (!Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language("eng")), $command)) {
+                $result = false;
+            }
+        }
+
+        return $result;
+    }
+
+    private function parseText(string $text, Player $player, array $response) : string
+    {
+        return str_replace(["{player.name}", "{key.group}", "{key.duration}"], [$player->getName(), $response["group"], $response["duration"]], $text);
     }
 }

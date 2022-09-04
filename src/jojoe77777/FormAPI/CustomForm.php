@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
-class CustomForm extends Form {
-
+class CustomForm extends Form
+{
     private $labelMap = [];
 
     /**
@@ -128,5 +128,4 @@ class CustomForm extends Form {
     private function addContent(array $content) : void {
         $this->data["content"][] = $content;
     }
-
 }

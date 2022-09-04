@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace jojoe77777\FormAPI;
 
-class SimpleForm extends Form {
-
+class SimpleForm extends Form
+{
     const IMAGE_TYPE_PATH = 0;
     const IMAGE_TYPE_URL = 1;
 
@@ -72,5 +72,4 @@ class SimpleForm extends Form {
         $this->data["buttons"][] = $content;
         $this->labelMap[] = $label ?? count($this->labelMap);
     }
-
 }
