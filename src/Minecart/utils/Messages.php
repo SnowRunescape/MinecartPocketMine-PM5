@@ -4,7 +4,6 @@ namespace Minecart\utils;
 
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
-
 use Minecart\Minecart;
 
 class Messages

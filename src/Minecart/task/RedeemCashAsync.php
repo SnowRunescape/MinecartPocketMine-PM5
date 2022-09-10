@@ -5,9 +5,7 @@ namespace Minecart\task;
 use pocketmine\console\ConsoleCommandSender;
 use pocketmine\player\Player;
 use pocketmine\scheduler\AsyncTask;
-
 use pocketmine\lang\Language;
-
 use Minecart\utils\Form;
 use Minecart\utils\API;
 use Minecart\Minecart;

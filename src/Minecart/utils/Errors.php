@@ -3,7 +3,6 @@
 namespace Minecart\utils;
 
 use pocketmine\player\Player;
-
 use Minecart\Minecart;
 
 class Errors

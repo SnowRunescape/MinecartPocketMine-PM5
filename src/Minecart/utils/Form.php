@@ -6,7 +6,6 @@ use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\ModalForm;
 use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\player\Player;
-
 use Minecart\task\RedeemCashAsync;
 use Minecart\task\RedeemVipAsync;
 use Minecart\Minecart;
@@ -101,7 +100,7 @@ class Form
                         $shopServer = Minecart::getInstance()->getCfg("Minecart.ShopServer");
 
                         if ($data) {
-                            if($this->cooldown->isInCooldown($player)){
+                            if ($this->cooldown->isInCooldown($player)) {
                                 $error = Minecart::getInstance()->getMessage("error.cooldown");
                                 $error = str_replace("{cooldown}", $this->cooldown->getCooldownTime($player), $error);
 
@@ -142,7 +141,9 @@ class Form
     public function showRedeem(Player $player, string $error = "") : void
     {
         $form = new CustomForm(function(Player $player, array $data = null){
-            if(empty($data)) return;
+            if (empty($data)) {
+                return;
+            }
 
             $error = "";
 
@@ -157,7 +158,7 @@ class Form
 
             $key = $data[0];
 
-            if(!empty($error)){
+            if (!empty($error)) {
                 $this->setTitle($this->title);
                 $this->setKey($key);
                 $this->setPlaceholder($this->placeholder);
@@ -206,8 +207,9 @@ class Form
         $form->setTitle($this->title);
         $form->addInput("Key", $this->placeholder, $this->key);
 
-        if(!empty($error))
+        if (!empty($error)) {
             $form->addLabel($error);
+        }
 
         $player->sendForm($form);
     }
