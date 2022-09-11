@@ -9,7 +9,7 @@ use Minecart\utils\Form;
 use Minecart\utils\Messages;
 use MineCart\Minecart;
 
-class Redeem  extends Command
+class Redeem extends Command
 {
     public function __construct()
     {
