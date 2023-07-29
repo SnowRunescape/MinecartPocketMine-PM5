@@ -49,7 +49,7 @@ class RedeemCashAsync extends AsyncTask
 
                 $command = $this->parseText($response["command"], $player, $response);
 
-                if (Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language("eng")), $command)) {
+                if (Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language("eng")), $command, true)) {
                     $messages = new Messages();
                     $messages->sendGlobalInfo($player, "cash", $response["cash"]);
                 } else {

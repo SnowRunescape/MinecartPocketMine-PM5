@@ -82,7 +82,7 @@ class RedeemVipAsync extends AsyncTask
         foreach ($response["commands"] as $command) {
             $command = $this->parseText($command, $player, $response);
 
-            if (!Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language("eng")), $command)) {
+            if (!Minecart::getInstance()->getServer()->dispatchCommand(new ConsoleCommandSender(Minecart::getInstance()->getServer(), new Language("eng")), $command, true)) {
                 $result = false;
             }
         }

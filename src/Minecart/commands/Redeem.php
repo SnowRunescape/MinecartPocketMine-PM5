@@ -14,6 +14,7 @@ class Redeem extends Command
     public function __construct()
     {
         parent::__construct("redeem", "Resgatar Keys");
+        $this->setPermission("redeem.command");
         $this->setAliases(["resgatar"]);
     }
 

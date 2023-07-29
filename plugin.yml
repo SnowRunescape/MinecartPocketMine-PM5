@@ -1,5 +1,10 @@
 name: Minecart
 version: 2.1.0
 author: Angelo @Th3Ang3lo
-api: ["4.0.0"]
+api: 5.0.0
 main: Minecart\Minecart
+permissions:
+  mykeys.command:
+    default: true
+  redeem.command:
+    default: true

@@ -15,6 +15,7 @@ class MyKeys extends Command
     public function __construct()
     {
         parent::__construct("mykeys", "Visualizar keys");
+        $this->setPermission("mykeys.command");
         $this->setAliases(["minhaskeys"]);
     }
 

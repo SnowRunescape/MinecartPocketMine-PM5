@@ -13,12 +13,12 @@ class Minecart extends PluginBase
 {
     const VERSION = "2.1.0";
 
-    public $messages = [];
-    public $config = [];
+    public array $messages = [];
+    public array $config = [];
 
-    public $cooldown = [];
+    public array $cooldown = [];
 
-    public static $instance;
+    public static self $instance;
 
     public function onEnable() : void
     {
